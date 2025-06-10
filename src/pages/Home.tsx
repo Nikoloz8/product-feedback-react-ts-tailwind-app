@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import tailwind from "../styles/tailwind"
-import data from "../../data.json"
-import suggestionImg from "../assets/suggestions/icon-suggestions.svg"
-import iconCheckImg from "../assets/shared/icon-check.svg"
-import iconArrowUp from "../assets/shared/icon-arrow-up.svg"
-import iconCommments from "../assets/shared/icon-comments.svg"
-import illustrationEmpty from "../assets/suggestions/illustration-empty.svg"
+import { useNavigate } from "react-router-dom"
+import { Context } from "../layouts/Layout"
+import Functions from "../utils/Functions"
 
 
 
@@ -14,43 +11,26 @@ export default function Home() {
     const { H2, P2, P3, H3, H4, liStyle, P1, H1 } = tailwind()
 
     const dropDownButtons = ["Most Upvotes", "Least Upvotes", "Most Comments", "Least Comments"]
-    const categorys = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"]
+
+    const { categorys, rightCase, commentsCount } = Functions()
 
     const [choosenCategory, setChoosenCategory] = useState(0)
-    const [productRequests, setProductRequests] = useState<TProductRequests[]>()
     const [showDropdown, setShowDropdown] = useState(false)
     const [selectedDropdown, setSelectedDropdown] = useState("Most Upvotes")
 
-    useEffect(() => {
-        const storedData = localStorage.getItem("21")
-
-        if (storedData) {
-            const parsedStoredData: TStoredData = JSON.parse(storedData)
-            const productRequests = parsedStoredData?.productRequests
-            setProductRequests(productRequests)
-        } else {
-            localStorage.setItem("21", JSON.stringify(data))
-        }
-    }, [])
-
+    const { productRequests } = useContext(Context)
 
     const plannedCount = productRequests?.filter((e) => e.status === "planned").length
     const inProgressCount = productRequests?.filter((e) => e.status === "in-progress").length
     const liveCount = productRequests?.filter((e) => e.status === "live").length
     const suggestionsCount = productRequests?.filter((e) => e.status === "suggestion").length
 
-    const rightCase = (category: string) => {
-        for (let i = 0; i < categorys.length; i++) {
-            if (category.toLocaleLowerCase() === categorys[i].toLowerCase()) {
-                return categorys[i]
-            }
-        }
-    }
+    const navigate = useNavigate()
 
     return (
         <div className="flex gap-[32px] mt-[50px]">
             <div className="flex flex-col w-[255px] gap-[24px]">
-                <div className="bg-[url('./assets/suggestions/desktop/background-header.png')] bg-center bg-no-repeat bg-cover w-[100%] h-[137px] rounded-[10px] p-[24px] flex flex-col justify-end">
+                <div className="bg-[url('/assets/suggestions/desktop/background-header.png')] bg-center bg-no-repeat bg-cover w-[100%] h-[137px] rounded-[10px] p-[24px] flex flex-col justify-end">
                     <h2 className={`${H2} text-[#FFFFFF]`}>Frontend Mentor</h2>
                     <h4 className={`${P2} font-[500] text-[#DFD5FC]`}>Feedback Board</h4>
                 </div>
@@ -62,7 +42,7 @@ export default function Home() {
                 <div className="w-[100%] p-[24px] rounded-[10px] bg-[#FFFFFF] flex flex-col gap-[24px]">
                     <div className="flex w-[100%] justify-between items-center">
                         <h3 className={`${H3}`}>Roadmap</h3>
-                        <a className={`underline ${P3} cursor-pointer text-[#4661E6]`}>View</a>
+                        <a className={`underline ${P3} cursor-pointer text-[#4661E6] hover:text-[#8397F8]`}>View</a>
                     </div>
                     <ul className="flex flex-col gap-[8px]">
                         <li className={`${liStyle} marker:text-[#F49F85]`}>
@@ -89,7 +69,7 @@ export default function Home() {
                 <div className="w-[100%] p-[16px] bg-[#373F68] justify-between rounded-[10px] flex">
                     <div className="flex items-center gap-[24px]">
                         <h3 className={`${H3} flex gap-[20px] items-center text-[#FFFFFF]`}>
-                            <img className="w-[24px]" src={suggestionImg} alt="" />
+                            <img className="w-[24px]" src="/assets/suggestions/icon-suggestions.svg" alt="" />
                             {suggestionsCount ? suggestionsCount : 0} Suggestions
                         </h3>
                         <div className="relative">
@@ -107,42 +87,42 @@ export default function Home() {
                                         setShowDropdown(false)
                                     }} className={`w-[100%] items-center group cursor-pointer p-[12px_24px_12px_24px] flex justify-between ${i != 3 ? "border-b-[1px] border-solid border-[#E2E3EA]" : undefined}`} >
                                         <h5 className={`${P1} text-[#647196] group-hover:text-[#AD1FEA]!`}>{e}</h5>
-                                        {e === selectedDropdown ? <img src={iconCheckImg} alt="" /> : undefined}
+                                        {e === selectedDropdown ? <img src="/assets/shared/icon-check.svg" alt="" /> : undefined}
                                     </button>
                                 })}
                             </div>
                         </div>
                     </div>
-                    <button className={`cursor-pointer p-[12px_24px_12px_24px] bg-[#C75AF6] ${H4} text-[#F2F4FE] rounded-[10px]`}>
+                    <button className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                         + Add Feedback
                     </button>
                 </div>
                 <div className="flex flex-col gap-[18px] mb-[50px]">
                     {productRequests ? productRequests.map((e, i) => {
-                        return <div key={i} className="w-[100%] bg-[#FFFFFF] rounded-[10px] flex p-[28px_32px_28px_32px] justify-between">
+                        return <div key={i} onClick={() => navigate(`/details/${e.id}`)} className="w-[100%] cursor-pointer bg-[#FFFFFF] group rounded-[10px] flex p-[28px_32px_28px_32px] justify-between">
                             <div className="flex items-start gap-[40px]">
-                                <div className="p-[12px_8px_12px_8px] bg-[#F2F4FE] flex flex-col gap-[8px] items-center rounded-[10px]">
-                                    <img src={iconArrowUp} alt="" />
+                                <div className="p-[12px_8px_12px_8px] bg-[#F2F4FE] hover:bg-[#CFD7FF] flex flex-col gap-[8px] items-center rounded-[10px]">
+                                    <img src="/assets/suggestions/icon-.svg" alt="" />
                                     <h5 className={`${P3} text-[#3A4374] font-[700]`}>
                                         {e.upvotes}
                                     </h5>
                                 </div>
                                 <div className="flex flex-col items-start">
-                                    <h3 className={`${H3} text-[#3A4374]`}>{e.title}</h3>
+                                    <h3 className={`${H3} text-[#3A4374] group-hover:text-[#4661E6]`}>{e.title}</h3>
                                     <h5 className={`${P1} text-[#647196] mb-[8px]`}>{e.description}</h5>
                                     <button className={`${P3} cursor-pointer outline-none bg-[#F2F4FF] text-[#4661E6] rounded-[10px] p-[8px_16px_8px_16px]`} >{e.category ? rightCase(e.category) : undefined}</button>
                                 </div>
                             </div>
                             <div className="flex items-center gap-[8px]">
-                                <img src={iconCommments} alt="" />
-                                <h5 className={`${P1} font-[700] text-[#3A4374]`}>{productRequests ? productRequests[0].comments?.length : ""}</h5>
+                                <img src="/assets/shared/icon-comments.svg" alt="" />
+                                <h5 className={`${P1} font-[700] text-[#3A4374]`}>{commentsCount(e)}</h5>
                             </div>
                         </div>
                     }) : <div className="w-[100%] h-[600px] bg-[#FFFFFF] rounded-[10px] gap-[24px] flex items-center justify-center flex-col">
-                        <img src={illustrationEmpty} alt="" />
+                        <img src="/assets/suggestions/illustration-empty.svg" alt="" />
                         <h1 className={`${H1} text-center`}>There is no feedback yet.</h1>
                         <p className={`${P1} text-[#647196] max-w-[410px] text-center`}>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</p>
-                        <button className={`cursor-pointer p-[12px_24px_12px_24px] bg-[#C75AF6] ${H4} text-[#F2F4FE] rounded-[10px]`}>
+                        <button className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                             + Add Feedback
                         </button>
                     </div>}

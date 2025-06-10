@@ -9,9 +9,5 @@ export default function tailwind() {
     const P3 = "font-[600] text-[1.3rem] text-[#3A4374]"
     const liStyle = `list-disc ml-[20px]! pr-[20p] w-[100%] marker:text-[20px] ${P1} text-[#647196]`
 
-
-
-
-
     return { H1, H2, H3, H4, P1, P2, P3, liStyle }
 }
