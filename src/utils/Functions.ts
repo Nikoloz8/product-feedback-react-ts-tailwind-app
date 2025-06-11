@@ -1,11 +1,18 @@
 import { useContext } from "react"
 import { Context } from "../layouts/Layout"
+import { useParams } from "react-router-dom"
 
 export default function Functions(args: TFunctionsArgs = {}) {
 
-    const { productRequest, detailsId } = args
+    const { activeReply, setReplyText, setActiveReply } = args
 
-    const { productRequests, setProductRequests } = useContext(Context)
+    const { setProductRequests } = useContext(Context)
+
+
+    const { detailsId } = useParams()
+    const { productRequests } = useContext(Context)
+
+    const productRequest = productRequests?.find((e) => e.id === Number(detailsId))
 
     const categorys = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"]
 
@@ -40,14 +47,19 @@ export default function Functions(args: TFunctionsArgs = {}) {
         const parsedStoredData: TStoredData = JSON.parse(storedData)
 
         const commentsArray = productRequest?.comments
+
+        if (commentsArray === undefined) {
+            productRequest.comments = []
+        }
+
         commentsArray?.push({
-            id: productRequest?.comments?.length,
+            id: Math.floor(Math.random() * 1000),
             content: commentText,
             user: parsedStoredData.currentUser
         })
 
-        const filteredProductRequests = productRequests?.filter((e) => e.id !== detailsId)
 
+        const filteredProductRequests = productRequests?.filter((e) => e.id !== Number(detailsId))
         filteredProductRequests?.push(productRequest)
 
 
@@ -63,5 +75,40 @@ export default function Functions(args: TFunctionsArgs = {}) {
 
     }
 
-    return { rightCase, categorys, commentsCount, postComment }
+    const postReply = (commentId: number | undefined, replyText: string) => {
+        if (!replyText.trim()) return
+        const storedData = localStorage.getItem("21")
+        if (!storedData || !productRequest) return
+
+        const parsedStoredData: TStoredData = JSON.parse(storedData)
+        const comment = productRequest.comments?.find(c => c.id === commentId)
+
+        const replyingTo = typeof activeReply?.replyIndex === "number" && comment?.replies?.[activeReply.replyIndex]?.user?.username ? comment.replies[activeReply.replyIndex].user?.username : comment?.user?.username
+
+        if (!comment) return
+        const newReply = {
+            content: replyText,
+            replyingTo,
+            user: parsedStoredData.currentUser
+        }
+
+        console.log(commentId)
+        console.log(comment)
+
+        comment.replies = comment.replies || []
+        comment.replies.push(newReply)
+
+        const filteredProductRequests = productRequests?.filter((e) => e.id !== detailsId)
+        const newObject = {
+            currentUser: parsedStoredData.currentUser,
+            productRequests: filteredProductRequests
+        }
+        const stringedNewObject = JSON.stringify(newObject)
+        localStorage.setItem("21", stringedNewObject)
+        setProductRequests(filteredProductRequests)
+        if (setReplyText) setReplyText("")
+        if (setActiveReply) setActiveReply(null)
+    }
+
+    return { rightCase, categorys, commentsCount, postComment, postReply }
 }

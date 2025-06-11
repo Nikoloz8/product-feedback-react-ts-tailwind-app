@@ -43,6 +43,15 @@ type TContext = {
 type TFunctionsArgs = Partial<{
     productRequest: TProductRequests
     detailsId: string
+    activeReply: {
+        replyIndex?: number;
+        commentId: number | undefined
+    } | null
+    setReplyText: React.Dispatch<React.SetStateAction<string>>
+    setActiveReply: React.Dispatch<React.SetStateAction<{
+        replyIndex?: number;
+        commentId: number | undefined;
+    } | null>>
 }>
 
 type TAsideBar = {
@@ -53,4 +62,17 @@ type TAsideBar = {
 type TFilterBar = {
     selectedDropdown: string
     setSelectedDropdown: React.Dispatch<React.SetStateAction<string>>
+}
+
+type TRenderComments = {
+    setActiveReply: React.Dispatch<React.SetStateAction<{
+        replyIndex?: number;
+        commentId: number | undefined;
+    } | null>>
+    setReplyText: React.Dispatch<React.SetStateAction<string>>
+    activeReply: {
+        replyIndex?: number;
+        commentId: number | undefined;
+    } | null
+    replyText: string
 }
