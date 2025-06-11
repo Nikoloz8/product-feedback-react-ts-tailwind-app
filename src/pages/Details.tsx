@@ -36,8 +36,6 @@ export default function Details() {
             user: parsedStoredData.currentUser
         }
 
-        console.log(replyText)
-
         comment.replies = comment.replies || []
         comment.replies.push(newReply)
 

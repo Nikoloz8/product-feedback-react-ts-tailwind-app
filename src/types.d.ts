@@ -44,3 +44,13 @@ type TFunctionsArgs = Partial<{
     productRequest: TProductRequests
     detailsId: string
 }>
+
+type TAsideBar = {
+    choosenCategory: number
+    setChoosenCategory: React.Dispatch<React.SetStateAction<number>>
+}
+
+type TFilterBar = {
+    selectedDropdown: string
+    setSelectedDropdown: React.Dispatch<React.SetStateAction<string>>
+}
