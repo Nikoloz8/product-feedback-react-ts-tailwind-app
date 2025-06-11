@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import tailwind from "../../styles/tailwind"
 import { Context } from "../../layouts/Layout"
+import { useNavigate } from "react-router-dom"
 
 export default function FilterBar({selectedDropdown, setSelectedDropdown}: TFilterBar) {
 
@@ -11,6 +12,7 @@ export default function FilterBar({selectedDropdown, setSelectedDropdown}: TFilt
 
     const suggestionsCount = productRequests?.filter((e) => e.status === "suggestion").length
 
+    const navigate = useNavigate()
 
     return (
         <div className="w-[100%] p-[16px] bg-[#373F68] justify-between rounded-[10px] flex">
@@ -40,7 +42,7 @@ export default function FilterBar({selectedDropdown, setSelectedDropdown}: TFilt
                     </div>
                 </div>
             </div>
-            <button className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
+            <button onClick={() => navigate("/newfeedback")} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                 + Add Feedback
             </button>
         </div>)

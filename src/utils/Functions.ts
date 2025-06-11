@@ -110,5 +110,25 @@ export default function Functions(args: TFunctionsArgs = {}) {
         if (setActiveReply) setActiveReply(null)
     }
 
-    return { rightCase, categorys, commentsCount, postComment, postReply }
+    const addFeedback = (productRequest: TProductRequests) => {
+        const storedData = localStorage.getItem("21")
+
+        if (!storedData) return
+
+        const parsedData: TStoredData = JSON.parse(storedData)
+        const requests = parsedData.productRequests
+        requests.push(productRequest)
+
+        setProductRequests(requests)
+
+        const newObject = {
+            currentUser: parsedData.currentUser,
+            productRequests: requests
+        }
+
+        const stringedObject = JSON.stringify(newObject)
+        localStorage.setItem("21", stringedObject)
+    }
+
+    return { rightCase, categorys, commentsCount, postComment, postReply, addFeedback }
 }

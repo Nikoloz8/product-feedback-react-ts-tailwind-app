@@ -23,7 +23,6 @@ type TProductRequests = {
             }
         }[]
     }[]
-
 }
 
 type TStoredData = {

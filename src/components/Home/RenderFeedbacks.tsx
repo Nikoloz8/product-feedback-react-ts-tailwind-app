@@ -16,8 +16,8 @@ export default function RenderFeedbacks() {
             {productRequests ? productRequests.map((e, i) => {
                 return <div key={i} onClick={() => navigate(`/details/${e.id}`)} className="w-[100%] cursor-pointer bg-[#FFFFFF] group rounded-[10px] flex p-[28px_32px_28px_32px] justify-between">
                     <div className="flex items-start gap-[40px]">
-                        <div className="p-[12px_8px_12px_8px] bg-[#F2F4FE] hover:bg-[#CFD7FF] flex flex-col gap-[8px] items-center rounded-[10px]">
-                            <img src="/assets/suggestions/icon-.svg" alt="" />
+                        <div className="p-[8px_0_8px_0] w-[40px]!  bg-[#F2F4FE] hover:bg-[#CFD7FF] flex flex-col gap-[8px] items-center rounded-[10px]">
+                            <img src="/assets/shared/icon-arrow-up.svg" alt="" />
                             <h5 className={`${P3} text-[#3A4374] font-[700]`}>
                                 {e.upvotes}
                             </h5>
