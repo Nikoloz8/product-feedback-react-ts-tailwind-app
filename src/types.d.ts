@@ -41,6 +41,10 @@ type TContext = {
     setProductRequest: React.Dispatch<React.SetStateAction<TProductRequests>>
     errors: boolean,
     setErrors: React.Dispatch<React.SetStateAction<boolean>>
+    showStatus: boolean
+    setShowStatus: React.Dispatch<React.SetStateAction<boolean>>
+    showDropdown: boolean
+    setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type TFunctionsArgs = Partial<{

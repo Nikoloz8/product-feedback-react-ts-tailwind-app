@@ -15,6 +15,7 @@ export default function Functions(args: TFunctionsArgs = {}) {
     const productRequest = productRequests?.find((e) => e.id === Number(detailsId))
 
     const categorys = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"]
+    const categorys2 = ["Suggestion", "Planned", "In-Progress", "Live"]
 
     const rightCase = (category: string) => {
         if (categorys) {
@@ -26,6 +27,15 @@ export default function Functions(args: TFunctionsArgs = {}) {
         }
     }
 
+    const rightCase2 = (category: string) => {
+        if (categorys2) {
+            for (let i = 0; i < categorys2.length; i++) {
+                if (category.toLocaleLowerCase() === categorys2[i].toLowerCase()) {
+                    return categorys2[i]
+                }
+            }
+        }
+    }
     const commentsCount = (productRequest: TProductRequests | undefined) => {
         let commentsCount = 0
         let repliesSum = 0
@@ -130,5 +140,30 @@ export default function Functions(args: TFunctionsArgs = {}) {
         localStorage.setItem("21", stringedObject)
     }
 
-    return { rightCase, categorys, commentsCount, postComment, postReply, addFeedback }
+    const saveEditedFeedback = (productRequest: TProductRequests, feedbackId: number | undefined) => {
+        const newProductRequests = productRequests?.filter((e) => e.id !== Number(feedbackId))
+        newProductRequests?.push(productRequest)
+        setProductRequests(newProductRequests)
+        const storedData = localStorage.getItem("21")
+        if (!storedData) return
+        const parsedData: TStoredData = JSON.parse(storedData)
+        const currentUser = parsedData.currentUser
+        const parsedNew = { currentUser, productRequests: newProductRequests }
+        const stringedNew = JSON.stringify(parsedNew)
+        localStorage.setItem("21", stringedNew)
+    }
+
+    const deleteFeedback = (feedbackId: number) => {
+        const newProductRequests = productRequests?.filter((e) => e.id !== Number(feedbackId))
+        setProductRequests(newProductRequests)
+        const storedData = localStorage.getItem("21")
+        if (!storedData) return
+        const parsedData: TStoredData = JSON.parse(storedData)
+        const currentUser = parsedData.currentUser
+        const parsedNew = { currentUser, productRequests: newProductRequests }
+        const stringedNew = JSON.stringify(parsedNew)
+        localStorage.setItem("21", stringedNew)
+    }
+
+    return { rightCase, rightCase2, categorys, saveEditedFeedback, commentsCount, postComment, postReply, addFeedback, deleteFeedback }
 }

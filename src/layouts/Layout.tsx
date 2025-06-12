@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useParams } from "react-router-dom"
 import data from "../../data.json"
 
 
@@ -17,22 +17,34 @@ export const Context = createContext<TContext>({
     },
     setProductRequest: () => { },
     errors: false,
-    setErrors: () => { }
+    setErrors: () => { },
+    showStatus: false,
+    setShowStatus: () => { },
+    showDropdown: false,
+    setShowDropdown: () => { }
 })
 
 
 
 export default function Layout() {
+    const [productRequests, setProductRequests] = useState<TProductRequests[] | undefined>()
+
+    const { feedbackId } = useParams()
+
     const [productRequest, setProductRequest] = useState<TProductRequests>({
-        id: Math.floor(Math.random() * 100000),
+        id: 0,
         title: "",
-        category: "Feature",
+        category: "feature",
         upvotes: 0,
-        status: "Suggestion",
+        status: "suggestion",
         description: "",
         comments: []
     })
 
+
+
+    const [showStatus, setShowStatus] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(false)
     const [errors, setErrors] = useState(false)
 
     useEffect(() => {
@@ -47,12 +59,27 @@ export default function Layout() {
         }
     }, [])
 
-    const [productRequests, setProductRequests] = useState<TProductRequests[] | undefined>()
+    useEffect(() => {
+        if (!productRequests || !feedbackId) return
 
+        const feedback = productRequests.find((e) => e.id === Number(feedbackId))
+
+        if (feedback) {
+            setProductRequest({
+                id: feedback.id,
+                title: feedback.title,
+                category: feedback.category,
+                upvotes: feedback.upvotes,
+                status: feedback.status,
+                description: feedback.description,
+                comments: feedback.comments || []
+            })
+        }
+    }, [productRequests, feedbackId])
 
     return (
         <div className="w-[100%] h-[100%] flex items-center justify-center min-h-[100vh] bg-[#F7F8FD]">
-            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors }}>
+            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors, showDropdown, setShowDropdown, setShowStatus, showStatus }}>
                 <Outlet />
             </Context.Provider>
         </div>

@@ -25,5 +25,6 @@ export default function NewFeedbackButtons() {
             }} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                 Add Feedback
             </button>
-        </div>)
+        </div>
+        )
 }

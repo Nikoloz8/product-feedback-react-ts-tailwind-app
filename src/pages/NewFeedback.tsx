@@ -1,14 +1,21 @@
 import tailwind from "../styles/tailwind"
-import { useNavigate } from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import Title from "../components/Feedback/Title"
 import Category from "../components/Feedback/Category"
-import Details from "./Details"
+import Details from "../components/Feedback/Details"
 import NewFeedbackButtons from "../components/Feedback/NewFeedbackButtons"
+import { useContext, useEffect } from "react"
+import { Context } from "../layouts/Layout"
 
 export default function NewFeedback() {
 
   const { H1, H4 } = tailwind()
   const navigate = useNavigate()
+  const { productRequest, setProductRequest } = useContext(Context)
+
+  useEffect(() => {
+    setProductRequest({ ...productRequest, id: Math.floor(Math.random() * 1000000), })
+  }, [])
 
   return (
     <div className="flex flex-col m-[60px_0_50px_0] gap-[50px]">
@@ -19,9 +26,7 @@ export default function NewFeedback() {
         </a>
       </div>
       <div className="w-[540px] p-[40px] bg-[#FFFFFF] rounded-[10px] ">
-        <div className={`w-[56px] h-[56px] rounded-[100%] bg-[radial-gradient(circle_at_top_right,_#E84D70_0%,_#A337F6_53%,_#28A7ED_100%)] text-[#FFFFFF] text-[3rem] font-[700] flex items-center justify-center pb-[5px] relative top-[-65px]`}>
-          +
-        </div>
+        <img src="/assets/shared/icon-new-feedback.svg" className={`w-[56px] relative top-[-68px]`} />
         <div className="mt-[-56px]!">
           <h1 className={`${H1}`}>Create New Feedback</h1>
 

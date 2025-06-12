@@ -26,7 +26,7 @@ export default function FilterBar({selectedDropdown, setSelectedDropdown}: TFilt
                         <span className="font-[400]">Sort by :</span>
                         <span className="flex items-center gap-[10px]">
                             {selectedDropdown}
-                            <svg width="10" className={`transition-transform duration-[500ms] ease-in-out ${showDropdown ? "rotate-180" : undefined}`} height="7" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="#FFFFFF" stroke-width="2" fill="none" fillRule="evenodd" /></svg>
+                            <svg width="10" className={`transition-transform duration-[500ms] ease-in-out ${showDropdown ? "rotate-180" : undefined}`} height="7" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="#FFFFFF" strokeWidth="2" fill="none" fillRule="evenodd" /></svg>
                         </span>
                     </h4>
                     <div className={`absolute w-[255px] rounded-[10px] top-[64px] shadow-[0_10px_40px_-7px_rgba(55,63,104,0.35)] bg-[#FFFFFF] ${!showDropdown ? "hidden" : undefined}`}>

@@ -6,6 +6,7 @@ import Layout from './layouts/Layout'
 import Home from './pages/Home'
 import Details from './pages/Details'
 import NewFeedback from './pages/NewFeedback'
+import EditFeedback from './pages/EditFeedback'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
       },{
         element: <NewFeedback />,
         path:"/newfeedback"
+      },{
+        element: <EditFeedback />,
+        path: "/editfeedback/:feedbackId"
       }
     ]
   }
