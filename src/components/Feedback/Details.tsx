@@ -6,7 +6,6 @@ export default function Details() {
 
     const { H4, P2 } = tailwind()
     const { productRequest, setProductRequest, errors } = useContext(Context)
-    console.log(productRequest)
     
     return (
         <div className="flex flex-col gap-[16px]">

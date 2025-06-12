@@ -3,10 +3,10 @@ import tailwind from "../../styles/tailwind"
 import { Context } from "../../layouts/Layout"
 import { useNavigate } from "react-router-dom"
 
-export default function FilterBar({selectedDropdown, setSelectedDropdown}: TFilterBar) {
+export default function FilterBar({ selectedDropdown, setSelectedDropdown }: TFilterBar) {
 
     const { H3, H4, P1 } = tailwind()
-    const { productRequests } = useContext(Context)
+    const { productRequests, setProductRequest } = useContext(Context)
     const [showDropdown, setShowDropdown] = useState(false)
     const dropDownButtons = ["Most Upvotes", "Least Upvotes", "Most Comments", "Least Comments"]
 
@@ -42,7 +42,18 @@ export default function FilterBar({selectedDropdown, setSelectedDropdown}: TFilt
                     </div>
                 </div>
             </div>
-            <button onClick={() => navigate("/newfeedback")} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
+            <button onClick={() => {
+                navigate("/newfeedback")
+                setProductRequest({
+                    id: 0,
+                    title: "",
+                    category: "feature",
+                    upvotes: 0,
+                    status: "suggestion",
+                    description: "",
+                    comments: []
+                })
+            }} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                 + Add Feedback
             </button>
         </div>)

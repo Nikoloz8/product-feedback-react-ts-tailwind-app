@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Details from './pages/Details'
 import NewFeedback from './pages/NewFeedback'
 import EditFeedback from './pages/EditFeedback'
+import Roadmap from './pages/Roadmap'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,9 @@ const router = createBrowserRouter([
       },{
         element: <EditFeedback />,
         path: "/editfeedback/:feedbackId"
+      },{
+        element: <Roadmap />,
+        path: "/roadmap"
       }
     ]
   }

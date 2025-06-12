@@ -102,9 +102,6 @@ export default function Functions(args: TFunctionsArgs = {}) {
             user: parsedStoredData.currentUser
         }
 
-        console.log(commentId)
-        console.log(comment)
-
         comment.replies = comment.replies || []
         comment.replies.push(newReply)
 
@@ -165,5 +162,10 @@ export default function Functions(args: TFunctionsArgs = {}) {
         localStorage.setItem("21", stringedNew)
     }
 
-    return { rightCase, rightCase2, categorys, saveEditedFeedback, commentsCount, postComment, postReply, addFeedback, deleteFeedback }
+
+    const planneds = productRequests?.filter((e) => e.status === "planned")
+    const inProgresses = productRequests?.filter((e) => e.status === "in-progress")
+    const lives = productRequests?.filter((e) => e.status === "live")
+
+    return { rightCase, rightCase2, categorys, saveEditedFeedback, commentsCount, postComment, postReply, addFeedback, deleteFeedback, planneds, inProgresses, lives }
 }

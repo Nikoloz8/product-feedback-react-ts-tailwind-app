@@ -27,7 +27,7 @@ export default function RenderComments({ setActiveReply, setReplyText, activeRep
                             <a onClick={() => {
                                 setActiveReply({ commentId: e.id })
                                 setReplyText("")
-                            }} className={`${P3} cursor-pointer text-[#4661E6]`}>Reply</a>
+                            }} className={`${P3} cursor-pointer hover:underline text-[#4661E6]`}>Reply</a>
                         </div>
                         <div>
                             <p className={`${P2} ${e.replies ? "border-l-[1px] pl-[32px] border-solid border-[#F0F1F5]" : "ml-[32px]"} text-[#647196]`}>{e.content}</p>
@@ -51,7 +51,7 @@ export default function RenderComments({ setActiveReply, setReplyText, activeRep
                                                     setActiveReply({ commentId: e.id, replyIndex: i })
                                                     setReplyText("")
                                                 }
-                                                } className={`${P3} cursor-pointer text-[#4661E6]`}>Reply</a>
+                                                } className={`${P3} hover:underline cursor-pointer text-[#4661E6]`}>Reply</a>
                                             </div>
                                             <div>
                                                 <p className={`${P2} text-[#647196]`}><span className={`${P2} text-[#AD1FEA] font-[700]`}>@{r.replyingTo} </span>{r.content}</p>
