@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import tailwind from "../../styles/tailwind"
 import { Context } from "../../layouts/Layout"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 
 export default function Category() {
 

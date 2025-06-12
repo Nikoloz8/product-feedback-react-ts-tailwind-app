@@ -1,6 +1,6 @@
 import { useState } from "react"
 import tailwind from "../../styles/tailwind"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 
 export default function PostCommentBar() {
 

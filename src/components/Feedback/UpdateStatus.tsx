@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Context } from "../../layouts/Layout"
 import tailwind from "../../styles/tailwind"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 
 export default function UpdateStatus() {
 

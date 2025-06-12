@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import tailwind from "../../styles/tailwind"
 import { Context } from "../../layouts/Layout"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 import { useParams } from "react-router-dom"
 
 export default function Feedback() {

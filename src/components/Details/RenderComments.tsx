@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import tailwind from "../../styles/tailwind"
 import { useContext } from "react"
 import { Context } from "../../layouts/Layout"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 
 export default function RenderComments({ setActiveReply, setReplyText, activeReply, replyText }: TRenderComments) {
 

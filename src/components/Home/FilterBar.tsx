@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import tailwind from "../../styles/tailwind"
 import { Context } from "../../layouts/Layout"
 import { useNavigate } from "react-router-dom"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 
 export default function FilterBar() {
 

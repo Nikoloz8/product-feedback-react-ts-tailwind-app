@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import tailwind from "../../styles/tailwind"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 import { useContext, useState } from "react"
 import { Context } from "../../layouts/Layout"
 

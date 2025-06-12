@@ -1,5 +1,5 @@
 import tailwind from "../../styles/tailwind"
-import Functions from "../../utils/Functions"
+import Functions from "../../utils"
 
 export default function RenderProgress() {
 
