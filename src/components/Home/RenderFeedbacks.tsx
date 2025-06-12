@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import tailwind from "../../styles/tailwind"
 import Functions from "../../utils"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { Context } from "../../layouts/Layout"
 
 export default function RenderFeedbacks() {
