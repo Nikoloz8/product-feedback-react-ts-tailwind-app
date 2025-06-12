@@ -5,11 +5,35 @@ import data from "../../data.json"
 
 export const Context = createContext<TContext>({
     productRequests: [],
-    setProductRequests: () => []
+    setProductRequests: () => [],
+    productRequest: {
+        id: 0,
+        title: "",
+        category: "",
+        upvotes: 0,
+        status: "",
+        description: "",
+        comments: []
+    },
+    setProductRequest: () => { },
+    errors: false,
+    setErrors: () => { }
 })
 
 
+
 export default function Layout() {
+    const [productRequest, setProductRequest] = useState<TProductRequests>({
+        id: Math.floor(Math.random() * 100000),
+        title: "",
+        category: "Feature",
+        upvotes: 0,
+        status: "Suggestion",
+        description: "",
+        comments: []
+    })
+
+    const [errors, setErrors] = useState(false)
 
     useEffect(() => {
         const storedData = localStorage.getItem("21")
@@ -28,7 +52,7 @@ export default function Layout() {
 
     return (
         <div className="w-[100%] h-[100%] flex items-center justify-center min-h-[100vh] bg-[#F7F8FD]">
-            <Context.Provider value={{ productRequests, setProductRequests }}>
+            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors }}>
                 <Outlet />
             </Context.Provider>
         </div>

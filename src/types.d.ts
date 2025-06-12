@@ -37,6 +37,10 @@ type TStoredData = {
 type TContext = {
     productRequests: TProductRequests[] | undefined
     setProductRequests: React.Dispatch<React.SetStateAction<TProductRequests[] | undefined>>
+    productRequest: TProductRequests
+    setProductRequest: React.Dispatch<React.SetStateAction<TProductRequests>>
+    errors: boolean,
+    setErrors: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type TFunctionsArgs = Partial<{
