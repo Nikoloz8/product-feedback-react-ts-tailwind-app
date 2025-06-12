@@ -10,7 +10,7 @@ export default function Roadmap() {
 
             <RoadmapNav />
 
-            <div className="flex justify-between w-[100%]">
+            <div className="flex justify-between w-[100%] max-lg:flex-col max-lg:items-center">
 
                 <RenderPlanned />
 

@@ -13,7 +13,7 @@ export default function Details() {
 
 
     return (
-        <div className="w-[730px] flex flex-col gap-[24px] mt-[32px]">
+        <div className="w-[730px] flex flex-col gap-[24px] p-[24px] mt-[32px]">
 
             <NavButtons />
 

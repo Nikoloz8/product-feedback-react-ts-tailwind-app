@@ -7,18 +7,17 @@ import Functions from "../../utils/Functions"
 export default function FilterBar() {
 
     const { H3, H4, P1 } = tailwind()
-    const { setErrors, setProductRequest, selectedDropdown, setSelectedDropdown } = useContext(Context)
+    const { setErrors, setProductRequest, selectedDropdown, setSelectedDropdown, isTablet } = useContext(Context)
     const [showDropdown, setShowDropdown] = useState(false)
     const dropDownButtons = ["Most Upvotes", "Least Upvotes", "Most Comments", "Least Comments"]
     const { suggestionsCount } = Functions()
     const navigate = useNavigate()
 
 
-
     return (
-        <div className="w-[100%] p-[16px] bg-[#373F68] justify-between rounded-[10px] flex">
+        <div className={`${isTablet ? "rounded-[0]!" : ""} w-[100%] p-[16px] bg-[#373F68] justify-between rounded-[10px] flex`}>
             <div className="flex items-center gap-[24px]">
-                <h3 className={`${H3} flex gap-[20px] items-center text-[#FFFFFF]`}>
+                <h3 className={`${H3} ${isTablet ? "hidden" : "flex"} gap-[20px] items-center text-[#FFFFFF]`}>
                     <img className="w-[24px]" src="/assets/suggestions/icon-suggestions.svg" alt="" />
                     {suggestionsCount ? suggestionsCount : 0} Suggestions
                 </h3>

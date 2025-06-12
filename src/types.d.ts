@@ -49,6 +49,10 @@ type TContext = {
     setSelectedDropdown: React.Dispatch<React.SetStateAction<string>>
     choosenCategory: string
     setChoosenCategory: React.Dispatch<React.SetStateAction<string>>
+    isTablet: boolean
+    setIsTablet: React.Dispatch<React.SetStateAction<boolean>>
+    showBurger: boolean
+    setShowBurger: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type TFunctionsArgs = Partial<{

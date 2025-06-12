@@ -25,7 +25,11 @@ export const Context = createContext<TContext>({
     selectedDropdown: "",
     setSelectedDropdown: () => { },
     choosenCategory: "",
-    setChoosenCategory: () => { }
+    setChoosenCategory: () => { },
+    isTablet: false,
+    setIsTablet: () => { },
+    showBurger: false,
+    setShowBurger: () => { }
 })
 
 
@@ -52,6 +56,7 @@ export default function Layout() {
     const [errors, setErrors] = useState(false)
     const [selectedDropdown, setSelectedDropdown] = useState("Most Upvotes")
     const [choosenCategory, setChoosenCategory] = useState("All")
+    const [showBurger, setShowBurger] = useState(false)
 
     useEffect(() => {
         const storedData = localStorage.getItem("21")
@@ -83,9 +88,30 @@ export default function Layout() {
         }
     }, [productRequests, feedbackId])
 
+    const [isTablet, setIsTablet] = useState(false)
+
+    useEffect(() => {
+        setIsTablet(window.innerWidth < 700)
+        const handleResize = () => setIsTablet(window.innerWidth < 700)
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
+
+    useEffect(() => {
+        if (showBurger) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = ""
+        }
+
+        return () => {
+            document.body.style.overflow = ""
+        };
+    }, [showBurger])
+
     return (
-        <div className="w-[100%] h-[100%] flex items-center justify-center min-h-[100vh] bg-[#F7F8FD]">
-            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors, showDropdown, setShowDropdown, setShowStatus, showStatus, setSelectedDropdown, selectedDropdown, choosenCategory, setChoosenCategory }}>
+        <div className={`w-[100%] h-[100%] flex items-start justify-center min-h-[100vh] bg-[#F7F8FD]`}>
+            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors, showDropdown, setShowDropdown, setShowStatus, showStatus, setSelectedDropdown, selectedDropdown, choosenCategory, setChoosenCategory, setIsTablet, isTablet, setShowBurger, showBurger }}>
                 <Outlet />
             </Context.Provider>
         </div>

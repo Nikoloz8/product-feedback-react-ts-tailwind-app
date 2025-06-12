@@ -12,7 +12,7 @@ export default function NewFeedbackButtons() {
     const { productRequest, setErrors } = useContext(Context)
 
     return (
-        <div className="flex justify-end gap-[16px]">
+        <div className="flex justify-end gap-[16px] max-sm:flex-col">
             <button onClick={() => {
                 navigate("/")
                 setErrors(false)

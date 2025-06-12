@@ -13,14 +13,14 @@ export default function EditingFeedbackButtons() {
     const { saveEditedFeedback, deleteFeedback } = Functions()
 
     return (
-        <div className="flex justify-between">
+        <div className="flex justify-between max-sm:flex-col">
             <button onClick={() => {
                 deleteFeedback(Number(feedbackId))
                 navigate(`/`)
             }} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#E98888] bg-[#D73737] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                 Delete
             </button>
-            <div className="flex gap-[16px]">
+            <div className="flex gap-[16px] max-sm:flex-col">
                 <button onClick={() => {
                     navigate(`/details/${feedbackId}`)
                     setErrors(false)

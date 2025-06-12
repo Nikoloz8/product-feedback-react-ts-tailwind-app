@@ -30,9 +30,9 @@ export default function RenderComments({ setActiveReply, setReplyText, activeRep
                             }} className={`${P3} cursor-pointer hover:underline text-[#4661E6]`}>Reply</a>
                         </div>
                         <div>
-                            <p className={`${P2} ${e.replies ? "border-l-[1px] pl-[32px] border-solid border-[#F0F1F5]" : "ml-[32px]"} text-[#647196]`}>{e.content}</p>
-                            {e.id === activeReply?.commentId && !activeReply?.hasOwnProperty("replyIndex") ? <div className="flex items-start ml-[32px] pr-[32px] mt-[32px] w-[100%] justify-between">
-                                <textarea value={replyText} onChange={(e) => setReplyText(e.target.value)} className={`w-[466px] h-[80px]! ${P2} outline-none rounded-[5px] p-[16px_24px_16px_24px] resize-none! focus:border-[1px] border-solid border-[#4661E6] bg-[#F7F8FD]`} placeholder="Type your Reply here" maxLength={250} name="" id="" />
+                            <p className={`${P2} ${e.replies ? "border-l-[1px] pl-[32px] border-solid border-[#F0F1F5]" : "ml-[32px]"} text-[#647196] break-words`}>{e.content}</p>
+                            {e.id === activeReply?.commentId && !activeReply?.hasOwnProperty("replyIndex") ? <div className="flex items-start max-md:m-[16px_0_16px_0] ml-[32px] pr-[32px] mt-[32px] w-[100%] justify-between max-md:p-0 max-md:items-center max-md:gap-[16px]">
+                                <textarea value={replyText} onChange={(e) => setReplyText(e.target.value)} className={`w-[466px] max-md:w-[100%] h-[80px]! ${P2} outline-none rounded-[5px] p-[16px_24px_16px_24px] resize-none! focus:border-[1px] border-solid border-[#4661E6] bg-[#F7F8FD]`} placeholder="Type your Reply here" maxLength={250} name="" id="" />
                                 <button onClick={() => postReply(e.id, replyText)} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                                     Post Reply
                                 </button>
@@ -54,9 +54,9 @@ export default function RenderComments({ setActiveReply, setReplyText, activeRep
                                                 } className={`${P3} hover:underline cursor-pointer text-[#4661E6]`}>Reply</a>
                                             </div>
                                             <div>
-                                                <p className={`${P2} text-[#647196]`}><span className={`${P2} text-[#AD1FEA] font-[700]`}>@{r.replyingTo} </span>{r.content}</p>
+                                                <p className={`${P2} text-[#647196]`}><span className={`${P2} text-[#AD1FEA] font-[700]`}>@{r.replyingTo} </span><span className="break-words max-w-0.5">{r.content}</span></p>
                                                 {e.id === activeReply?.commentId && activeReply?.replyIndex === i ? <div className="flex items-start mt-[32px] w-[100%] justify-between">
-                                                    <textarea value={replyText} onChange={(e) => setReplyText(e.target.value)} className={`w-[416px] h-[80px]! ${P2} outline-none rounded-[5px] p-[16px_24px_16px_24px] resize-none! focus:border-[1px] border-solid border-[#4661E6] bg-[#F7F8FD]`} placeholder="Type your Reply here" maxLength={250} name="" id="" />
+                                                    <textarea value={replyText} onChange={(e) => setReplyText(e.target.value)} className={`w-[416px] max-md:w-[100%] h-[80px]! ${P2} outline-none rounded-[5px] p-[16px_24px_16px_24px] resize-none! focus:border-[1px] border-solid border-[#4661E6] bg-[#F7F8FD]`} placeholder="Type your Reply here" maxLength={250} name="" id="" />
                                                     <button onClick={() => postReply(e.id, replyText)} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#C75AF6] bg-[#AD1FEA] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                                                         Post Reply
                                                     </button>
