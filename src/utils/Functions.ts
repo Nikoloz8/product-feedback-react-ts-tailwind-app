@@ -6,7 +6,7 @@ export default function Functions(args: TFunctionsArgs = {}) {
 
     const { activeReply, setReplyText, setActiveReply } = args
 
-    const { setProductRequests } = useContext(Context)
+    const { setProductRequests, choosenCategory , selectedDropdown} = useContext(Context)
 
 
     const { detailsId } = useParams()
@@ -167,5 +167,60 @@ export default function Functions(args: TFunctionsArgs = {}) {
     const inProgresses = productRequests?.filter((e) => e.status === "in-progress")
     const lives = productRequests?.filter((e) => e.status === "live")
 
-    return { rightCase, rightCase2, categorys, saveEditedFeedback, commentsCount, postComment, postReply, addFeedback, deleteFeedback, planneds, inProgresses, lives }
+
+    const suggestionsCount = productRequests?.filter((e) => e.status === "suggestion").length
+
+    const descedingUpvotes = () => {
+        const descedingUpvote = (productRequests ?? []).sort((a, b) =>
+            (b.upvotes ?? 0) - (a.upvotes ?? 0)
+        )
+        return descedingUpvote
+    }
+
+    const ascedingUpvotes = () => {
+        const ascedingUpvote = (productRequests ?? []).sort((a, b) =>
+            (a.upvotes ?? 0) - (b.upvotes ?? 0)
+        )
+        return ascedingUpvote
+    }
+
+    const descedingComments = () => {
+        const descedingComment = (productRequests ?? []).sort((a, b) =>
+            (commentsCount(b) ?? 0) - (commentsCount(a) ?? 0)
+        )
+        return descedingComment
+    }
+
+    const ascedingComments = () => {
+        const ascedingComment = (productRequests ?? []).sort((a, b) =>
+            (commentsCount(a) ?? 0) - (commentsCount(b) ?? 0)
+        )
+        return ascedingComment
+    }
+
+    const filteredRequests = () => {
+        const category = choosenCategory === "All" ? null : choosenCategory.toLowerCase()
+
+        let sortedRequests
+
+        switch (selectedDropdown) {
+            case "Most Upvotes":
+                sortedRequests = descedingUpvotes()
+                break;
+            case "Least Upvotes":
+                sortedRequests = ascedingUpvotes()
+                break;
+            case "Most Comments":
+                sortedRequests = descedingComments()
+                break;
+            default:
+                sortedRequests = ascedingComments()
+        }
+
+        return category
+            ? sortedRequests.filter((e) => e.category === category)
+            : sortedRequests
+    }
+
+    return { rightCase, rightCase2, categorys, saveEditedFeedback, commentsCount, postComment, postReply, addFeedback, deleteFeedback, planneds, inProgresses, lives, filteredRequests, suggestionsCount }
 }

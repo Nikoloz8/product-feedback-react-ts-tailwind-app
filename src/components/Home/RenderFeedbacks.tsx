@@ -1,19 +1,16 @@
-import { useContext } from "react"
-import { Context } from "../../layouts/Layout"
 import { useNavigate } from "react-router-dom"
 import tailwind from "../../styles/tailwind"
 import Functions from "../../utils/Functions"
 
 export default function RenderFeedbacks() {
 
-    const { productRequests } = useContext(Context)
     const navigate = useNavigate()
     const { P3, H3, P1, H1, H4 } = tailwind()
-    const { rightCase, commentsCount } = Functions()
+    const { rightCase, commentsCount, filteredRequests } = Functions()
 
     return (
         <div className="flex flex-col gap-[18px] mb-[50px]">
-            {productRequests ? productRequests.map((e, i) => {
+            {filteredRequests() ? filteredRequests()?.map((e, i) => {
                 return <div key={i} onClick={() => navigate(`/details/${e.id}`)} className="w-[100%] cursor-pointer bg-[#FFFFFF] group rounded-[10px] flex p-[28px_32px_28px_32px] justify-between">
                     <div className="flex items-start gap-[40px]">
                         <div className="p-[8px_0_8px_0] w-[40px]!  bg-[#F2F4FE] hover:bg-[#CFD7FF] flex flex-col gap-[8px] items-center rounded-[10px]">

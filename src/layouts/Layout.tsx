@@ -21,7 +21,11 @@ export const Context = createContext<TContext>({
     showStatus: false,
     setShowStatus: () => { },
     showDropdown: false,
-    setShowDropdown: () => { }
+    setShowDropdown: () => { },
+    selectedDropdown: "",
+    setSelectedDropdown: () => { },
+    choosenCategory: "",
+    setChoosenCategory: () => { }
 })
 
 
@@ -46,6 +50,8 @@ export default function Layout() {
     const [showStatus, setShowStatus] = useState(false)
     const [showDropdown, setShowDropdown] = useState(false)
     const [errors, setErrors] = useState(false)
+    const [selectedDropdown, setSelectedDropdown] = useState("Most Upvotes")
+    const [choosenCategory, setChoosenCategory] = useState("All")
 
     useEffect(() => {
         const storedData = localStorage.getItem("21")
@@ -79,7 +85,7 @@ export default function Layout() {
 
     return (
         <div className="w-[100%] h-[100%] flex items-center justify-center min-h-[100vh] bg-[#F7F8FD]">
-            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors, showDropdown, setShowDropdown, setShowStatus, showStatus }}>
+            <Context.Provider value={{ productRequests, setProductRequests, setProductRequest, productRequest, errors, setErrors, showDropdown, setShowDropdown, setShowStatus, showStatus, setSelectedDropdown, selectedDropdown, choosenCategory, setChoosenCategory }}>
                 <Outlet />
             </Context.Provider>
         </div>

@@ -45,6 +45,10 @@ type TContext = {
     setShowStatus: React.Dispatch<React.SetStateAction<boolean>>
     showDropdown: boolean
     setShowDropdown: React.Dispatch<React.SetStateAction<boolean>>
+    selectedDropdown: string,
+    setSelectedDropdown: React.Dispatch<React.SetStateAction<string>>
+    choosenCategory: string
+    setChoosenCategory: React.Dispatch<React.SetStateAction<string>>
 }
 
 type TFunctionsArgs = Partial<{
@@ -60,16 +64,6 @@ type TFunctionsArgs = Partial<{
         commentId: number | undefined;
     } | null>>
 }>
-
-type TAsideBar = {
-    choosenCategory: number
-    setChoosenCategory: React.Dispatch<React.SetStateAction<number>>
-}
-
-type TFilterBar = {
-    selectedDropdown: string
-    setSelectedDropdown: React.Dispatch<React.SetStateAction<string>>
-}
 
 type TRenderComments = {
     setActiveReply: React.Dispatch<React.SetStateAction<{

@@ -31,7 +31,7 @@ export default function Category() {
             <div className="absolute w-[100%] shadow-[0_10px_40px_-7px_rgba(55,63,104,0.35)] bottom-[-260px] bg-[#FFFFFF] rounded-[10px] z-10">
                 {categorys.map((e, i) => {
                     return <button onClick={() => {
-                        setProductRequest({ ...productRequest, category: e })
+                        setProductRequest({ ...productRequest, category: e.toLowerCase() })
                         setShowDropdown(false)
                     }} key={i} className={`w-[100%] ${i + 1 != categorys.length ? "border-b-[1px] border-solid border-[#E2E3EA]" : undefined} ${!showDropdown ? "hidden" : "block"} outline-none p-[12px_24px_12px_24px] hover:text-[#AD1FEA] cursor-pointer text-left ${P1} text-[#647196] flex items-center justify-between`}>
                         {e}

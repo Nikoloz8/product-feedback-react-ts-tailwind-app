@@ -21,7 +21,10 @@ export default function EditingFeedbackButtons() {
                 Delete
             </button>
             <div className="flex gap-[16px]">
-                <button onClick={() => navigate(`/details/${feedbackId}`)} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#656EA3] bg-[#3A4374] ${H4} text-[#F2F4FE] rounded-[10px]`}>
+                <button onClick={() => {
+                    navigate(`/details/${feedbackId}`)
+                    setErrors(false)
+                }} className={`cursor-pointer p-[12px_24px_12px_24px] hover:bg-[#656EA3] bg-[#3A4374] ${H4} text-[#F2F4FE] rounded-[10px]`}>
                     Cancel
                 </button>
                 <button onClick={() => {
